@@ -1,0 +1,29 @@
+{
+  "name": "Blue Gestor",
+  "description": "Gestor do app blueme",
+  "main": "main.js",
+  "authors": [
+    "GitHub"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "homepage": "https://github.com/jpaulo789b/BlueGestor",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-chart.js": "^1.1.1",
+    "firebase": "^4.3.0",
+    "uikit": "^2.27.4"
+  }
+}
