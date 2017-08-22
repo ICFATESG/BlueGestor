@@ -24,6 +24,12 @@
   "dependencies": {
     "angular-chart.js": "^1.1.1",
     "firebase": "^4.3.0",
-    "uikit": "^2.27.4"
+    "uikit": "^2.27.4",
+    "pouchdb": "^6.3.4",
+    "isteven-angular-multiselect": "angular-multi-select#^4.0.0",
+    "angular-ui-router": "^1.0.6",
+    "bootbox.js": "bootbox#^4.4.0",
+    "angular-material-data-table": "^0.10.10",
+    "bootswatch": "^3.3.7"
   }
 }
