@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var app = angular.module('BlueGestor',['ui.router','md.data.table','isteven-multi-select']);
+  var app = angular.module('BlueGestor',['ui.router','isteven-multi-select','angular-table']);
   // Estabelece comnunicação com banco de dados e etc...
   app.run(function($database, $rootScope) {
     // $database.destroy();
@@ -40,12 +40,8 @@
       }
 
     }
-    this.getOficinas = function (IDoficina) {
-      if (IDevento == undefined) {
-        return firebase.database().ref('Oficinas').once('value');
-      }else{
-        return firebase.database().ref('Oficinas' + IDoficina).once('value');
-      }
+    this.getOficinas = function (IDevento) {
+        return firebase.database().ref('Oficinas').child(IDevento).once('value');
     }
     this.saveOficina = function (Oficina,key) {
       if (key != undefined) {
@@ -59,6 +55,9 @@
     this.dadosDosUsuarios = function () {
       return firebase.database().ref('Usuarios').once('value');
     }
+    this.dadoAdminstrador = function () {
+      return firebase.database().ref('adminstrador').once('value');
+    }
 
     function newKey() {
       return firebase.database().ref().child('Evento').push().key;
@@ -71,8 +70,12 @@
      .state('login', {
       url: "/login",
       templateUrl: "pages/login.html",
-      controller: "verificacaoGestor"
-    });
+      controller: "verificacaoGestor",
+    }).state('eventosEoficinas', {
+     url: "/eventosEoficinas",
+     templateUrl: "pages/listarEventosEOficinas.html",
+     controller: "eventosEoficinas"
+   });
     $urlRouterProvider.otherwise("/login");
   });
 

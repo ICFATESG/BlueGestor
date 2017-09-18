@@ -1,4 +1,32 @@
+@font-face {
+  font-family: 'Roboto';
+  src:  url('fonts/Roboto/Roboto-Regular.ttf') format('ttf'),
+}
+
 .navbar-default {
     background-color: #198eb5;
     border-color: #222222;
+}
+.card {
+  background:rgba(255, 255, 255, 0.97);
+  padding: 10px;
+  border-radius: 5px;
+}
+table {
+  width: 100%;
+  font-family: Roboto;
+}
+table button{
+  float: right;
+}
+.cardTable {
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);
+  width: 100%;
+      transition: 0.3s;
+      padding-top: 15px;
+      padding-bottom: 15px;
+      padding-left: 10px;
+      padding-right: 10px;
+      background: white;
+      border-radius: 2px;
 }
