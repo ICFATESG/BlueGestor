@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pesquisar por...">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button">Pesquisar!</button>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6">
+
+              <button type="button" class="btn btn-block btn-success"  data-toggle="modal" data-target="#modalUIPalestrante">
+                Adicionar novo
+              </button>
+            </div>
+          </div>
+          <!-- tabela de listagem -->
+          <table at-table at-config="config" at-list="palestrantes" at-paginated>
+            <thead>
+
+            </thead>
+            <tbody>
+              <tr>
+                <td  class="cardTable">
+                  <a ng-click="listaOficinas(item.key)"> {{item.nome}}</a>
+                  <button class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                     Remover </button>
+
+                    <button class="btn btn-default">
+                      <span class="glyphicon glyphicon-eye-open"></span>
+                      Visualizar
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <at-pagination at-config="config" at-list="eventos"></at-pagination>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div  ng-include="'pages/modal/palestranteModal.html'"></div>

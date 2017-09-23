@@ -4,7 +4,7 @@
   // Estabelece comnunicação com banco de dados e etc...
   app.run(function($database, $rootScope) {
     // $database.destroy();
-      var config = {
+    var config = {
       apiKey: "AIzaSyDmOaIOhzHfD36CIwqghdq3oGPVvIgVqVY",
       authDomain: "blueme-3acca.firebaseapp.com",
       databaseURL: "https://blueme-3acca.firebaseio.com",
@@ -12,10 +12,10 @@
       storageBucket: "blueme-3acca.appspot.com",
       messagingSenderId: "113538853283"
     };
-  firebase.initializeApp(config);
+    firebase.initializeApp(config);
   });
 
-  // Comunicação geral com Banco de dados pouchdb
+
   app.service("$database", ["$rootScope", "$q", function($rootScope, $q) {
     // Configuração do banco de dados.
     var database;
@@ -40,8 +40,20 @@
       }
 
     }
+    this.savePalestrante = function (palestrante,key) {
+      console.log("Mandou salvar");
+      if (key != undefined) {
+        firebase.database().ref('palestrante').child(key).set(palestrante);
+      } else {
+         var newPostKey = firebase.database().ref().child('Evento').push().key;
+        firebase.database().ref('palestrante').child(newPostKey).set(palestrante);
+      }
+    }
+    this.getPalestrantes = function () {
+      return firebase.database().ref('palestrante').once('value');
+    }
     this.getOficinas = function (IDevento) {
-        return firebase.database().ref('Oficinas').child(IDevento).once('value');
+      return firebase.database().ref('Oficinas').child(IDevento).once('value');
     }
     this.saveOficina = function (Oficina,key) {
       if (key != undefined) {
@@ -66,16 +78,21 @@
   }]);
   // Configurações de URL
   app.config(function($stateProvider, $urlRouterProvider){
-     $stateProvider
-     .state('login', {
+    $stateProvider
+    .state('login', {
       url: "/login",
       templateUrl: "pages/login.html",
       controller: "verificacaoGestor",
     }).state('eventosEoficinas', {
-     url: "/eventosEoficinas",
-     templateUrl: "pages/listarEventosEOficinas.html",
-     controller: "eventosEoficinas"
-   });
+      url: "/eventosEoficinas",
+      templateUrl: "pages/listarEventosEOficinas.html",
+      controller: "eventosEoficinas"
+    }).state('palestrantes',{
+      url: "/palestrantes",
+      templateUrl: "pages/palestrantesUI.html",
+      controller: "palestrantesCTRL"
+
+    });
     $urlRouterProvider.otherwise("/login");
   });
 

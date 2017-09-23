@@ -24,9 +24,7 @@
       <div class="col-md-6">
         <table at-table at-config="config" at-list="eventos" at-paginated>
           <thead>
-            <tr>
-              <th at-attribute="nomeEvento">Nome do evento</th>
-            </tr>
+
           </thead>
           <tbody>
             <tr>
@@ -41,6 +39,22 @@
 
       </div>
       <div class="col-md-6">
+        <br>
+        <div class="row">
+		<div class="col-md-6">
+      <input id="textinput" name="textinput" type="text" placeholder="Pesquisar" class="form-control input-md">
+		</div>
+		<div class="col-md-5">
+			<div class="row">
+				<div class="col-md-6">
+          <a href="#" class="btn btn-block btn-default"><span class="glyphicon glyphicon-search"></span> Pesquisar</a>
+				</div>
+				<div class="col-md-6">
+          <a href="#" class="btn btn-block btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar</a>
+				</div>
+			</div>
+		</div>
+	</div>
         <table at-table at-config="config" at-list="oficinasEventos" at-paginated>
           <thead>
             <tr>
@@ -53,7 +67,7 @@
                   {{item.nomeOficina}}
               </td>
               <td>
-                <button class="btn btn-sm btn-success"><span class="glyphicon glyphicon-pencil"></span> Editar oficina</button>
+                <button class="btn btn-sm btn-success" ng-click="carregaOficina(item)" data-toggle="modal" data-target="#modalEditarOficina"><span class="glyphicon glyphicon-pencil"></span> Editar oficina</button>
               </td>
               <td>
                 <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Deletar Oficina</button>
@@ -67,3 +81,5 @@
     </div>
   </div>
 </div>
+<div  ng-include="'pages/modal/eventoModal.html'"></div>
+<div  ng-include="'pages/modal/oficinaModal.html'"></div>

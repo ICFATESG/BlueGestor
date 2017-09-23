@@ -4,6 +4,8 @@
   app.controller('eventosEoficinas' ,function ($scope, $database ,$stateParams,$state,$filter, $rootScope){
     $scope.eventos = [];
     $scope.oficinasEventos = [];
+    $scope.oficinaEditar = {};
+    $scope.eventoEditar = {};
     $database.getEvento().then(function(eventos){
       return eventos.val();
     }).then(function (eventos) {
@@ -26,6 +28,10 @@
         $scope.$apply();
       });
 
+    }
+    // Carrega ofina no formulário
+    $scope.carregaOficina = function (oficina) {
+        $scope.oficinaEditar = oficina;
     }
 
     // Paginação configuração
