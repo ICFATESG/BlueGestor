@@ -7,6 +7,9 @@
     background-color: #198eb5;
     border-color: #222222;
 }
+button {
+  margin-left: 5px;
+}
 .card {
   background:rgba(255, 255, 255, 0.97);
   padding: 10px;

@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var app = angular.module('BlueGestor',['ui.router','isteven-multi-select','angular-table']);
+  var app = angular.module('BlueGestor',['ui.router','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask']);
   // Estabelece comnunicação com banco de dados e etc...
   app.run(function($database, $rootScope) {
     // $database.destroy();
@@ -21,6 +21,10 @@
     var database;
     var changeListener;
     var fireDB;
+
+    function newKey() {
+        var newPostKey = firebase.database().ref().child('Evento').push().key;
+    }
     this.firebase = function () {
       return firebase.database();
     }
@@ -28,25 +32,37 @@
       if (IDevento == undefined) {
         return firebase.database().ref('Evento').once('value');
       }else{
-        return firebase.database().ref('Evento' + IDevento).once('value');
+        return firebase.database().ref('Evento/' + IDevento).once('value');
       }
 
     }
-    this.saveEvento = function (evento,key) {
-      if (key != undefined) {
-        firebase.database().ref('Evento').child(key).set(evento);
-      } else {
-        firebase.database().ref('Evento').set(evento);
+    this.saveEvento = function (evento) {
+      var novaKey = newKey();
+      evento = angular.copy(evento);
+      if(evento != undefined){
+        if (evento.id != undefined) {
+          var key = evento.key;
+          delete evento.key;
+          evento.id = key;
+          firebase.database().ref('Evento').child(evento.id).set(evento);
+        } else {
+          evento.id = novaKey;
+          firebase.database().ref('Evento').child(novaKey).set(evento);
+        }
       }
-
+      return evento;
     }
+
+
     this.savePalestrante = function (palestrante,key) {
+      var salvar = angular.copy(palestrante);
       console.log("Mandou salvar");
       if (key != undefined) {
-        firebase.database().ref('palestrante').child(key).set(palestrante);
+        delete palestrante.key;
+        firebase.database().ref('palestrante').child(key).set(salvar);
       } else {
-         var newPostKey = firebase.database().ref().child('Evento').push().key;
-        firebase.database().ref('palestrante').child(newPostKey).set(palestrante);
+
+        firebase.database().ref('palestrante').child(newKey()).set(salvar);
       }
     }
     this.getPalestrantes = function () {
@@ -55,12 +71,23 @@
     this.getOficinas = function (IDevento) {
       return firebase.database().ref('Oficinas').child(IDevento).once('value');
     }
-    this.saveOficina = function (Oficina,key) {
-      if (key != undefined) {
-        firebase.database().ref('Evento').child(key).set(evento);
-      } else {
-        firebase.database().ref('Evento').child(newKey()).set(evento);
+    this.saveOficina = function (Oficina,keyEvento) {
+      var key = newKey();
+      Oficina = angular.copy(Oficina);
+      keyEvento = angular.copy(keyEvento);
+      console.log("HORA "+Oficina);
+      console.log("HORA "+keyEvento);
+      if (Oficina != undefined) {
+        if (Oficina.key != undefined) {
+          Oficina.id = angular.copy(Oficina.key);
+          delete Oficina.key;
+          firebase.database().ref('Oficinas').child(keyEvento).child(Oficina.id).set(Oficina);
+        }else{
+          Oficina.id = angular.copy(key);
+          firebase.database().ref('Oficinas').child(keyEvento).child(key).set(Oficina);
+        }
       }
+
 
     }
 

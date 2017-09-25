@@ -27,12 +27,12 @@
             <tbody>
               <tr>
                 <td  class="cardTable">
-                  <a ng-click="listaOficinas(item.key)"> {{item.nome}}</a>
-                  <button class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove"></span>
+                   {{item.nome}}
+                  <button class="btn btn-danger" ng-click="removerPalestrante(item)">
+                    <span class="glyphicon glyphicon-remove" ></span>
                      Remover </button>
 
-                    <button class="btn btn-default">
+                    <button class="btn btn-default" ng-click="visualizarPalestrante(item)"  data-toggle="modal" data-target="#modalUIPalestrante">
                       <span class="glyphicon glyphicon-eye-open"></span>
                       Visualizar
                     </button>

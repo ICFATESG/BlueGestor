@@ -5,15 +5,17 @@
         <div class="row">
           <div class="col-md-4">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Buscar por..." aria-label="Search for...">
+              <input type="text" ng-model="pesquisaEvento" class="form-control" placeholder="Buscar por..." aria-label="Search for...">
               <span class="input-group-btn">
                 <button class="btn btn-secondary" type="button">Pesquisar!</button>
               </span>
             </div>
           </div>
           <div class="col-md-4">
+            <button type="button" name="button"  ng-click="zerarFormulario()"  class="btn btn-block btn-default ">Adicionar novo Evento</button>
           </div>
           <div class="col-md-4">
+            <button ng-if="evento.nomeEvento" ng-click="salvar()" type="button" name="button" class="btn btn-block btn-default ">Salvar evento</button>
           </div>
         </div>
       </div>
@@ -22,15 +24,17 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-        <table at-table at-config="config" at-list="eventos" at-paginated>
+        <table at-table at-config="config" at-list="eventos | filter : pesquisaEvento"   at-paginated>
           <thead>
 
           </thead>
           <tbody>
             <tr>
-              <td at-title="nomeEvento"  class="cardTable">
-                <a ng-click="listaOficinas(item.key)"> {{item.nomeEvento}}</a>
+              <td at-title="Nome do evento"  class="cardTable" at-attribute="$index" at-sortable at-initial-sorting="desc">
+                {{item.nomeEvento}}
+
                 <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Deletar evento</button>
+                <button class="btn btn-sm btn-default" ng-click="listaOficinas(item.key)"><span class="glyphicon glyphicon-eye-open"></span> visualizar evento</button>
               </td>
             </tr>
           </tbody>
@@ -39,23 +43,74 @@
 
       </div>
       <div class="col-md-6">
-        <br>
-        <div class="row">
-		<div class="col-md-6">
-      <input id="textinput" name="textinput" type="text" placeholder="Pesquisar" class="form-control input-md">
-		</div>
-		<div class="col-md-5">
-			<div class="row">
-				<div class="col-md-6">
-          <a href="#" class="btn btn-block btn-default"><span class="glyphicon glyphicon-search"></span> Pesquisar</a>
-				</div>
-				<div class="col-md-6">
-          <a href="#" class="btn btn-block btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar</a>
-				</div>
-			</div>
-		</div>
-	</div>
-        <table at-table at-config="config" at-list="oficinasEventos" at-paginated>
+
+        <!-- form evento  -->
+        <form class="form-horizontal">
+          <fieldset>
+
+            <!-- Form Name -->
+            <legend>
+              {{ (evento.key == undefined) ? 'Adicionar novo evento':'Editar o evento '+evento.nomeEvento}}</legend>
+
+            <!-- Prepended text-->
+            <div class="form-group">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <span class="input-group-addon">Nome do evento</span>
+                  <input id="prependedtext" ng-model="evento.nomeEvento" name="prependedtext" class="form-control" placeholder="" type="text">
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12">
+                <div class="input-group">
+                  <span class="input-group-addon">Localização evento</span>
+                  <input id="prependedtext" ng-model="evento.localizacaoEvento" name="prependedtext" class="form-control" placeholder="" type="text">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Inicio</span>
+                  <input ng-model="evento.horaInicioEvento" ng-value="evento.horaInicioEvento | date: 'HH:mm' " name="prependedtext" class="form-control" placeholder="00:00" type="time">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">fim</span>
+                  <input  ng-model="evento.horaFimEvento" ng-value="evento.horaFimEvento | date: 'HH:mm'" name="prependedtext" class="form-control" placeholder="00:00" type="time">
+                </div>
+              </div>
+            </div>
+
+
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <input id="textinput" name="textinput" ng-model="pesquisaOficina" type="text" placeholder="Pesquisar" class="form-control input-md">
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <a href="#" class="btn btn-block btn-default"><span class="glyphicon glyphicon-search"></span> Pesquisar</a>
+                  </div>
+                  <div class="col-md-6">
+                    <a  class="btn btn-block btn-success"  data-toggle="modal" data-target="#modalEditarOficina"><span class="glyphicon glyphicon-plus"></span> Adicionar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </fieldset>
+        </form>
+
+        <!-- fim form evento -->
+
+
+
+        <table at-table at-config="configOficina" at-list="oficinasEventos | filter : pesquisaOficina" at-paginated>
           <thead>
             <tr>
               <th at-attribute="nomeOficina">Nome da Oficina</th>
@@ -63,11 +118,11 @@
           </thead>
           <tbody>
             <tr>
-              <td at-title="nomeOficina"  class="cardTable">
-                  {{item.nomeOficina}}
+              <td at-title="Nome da oficina"  class="cardTable">
+                {{item.nomeOficina}}
               </td>
               <td>
-                <button class="btn btn-sm btn-success" ng-click="carregaOficina(item)" data-toggle="modal" data-target="#modalEditarOficina"><span class="glyphicon glyphicon-pencil"></span> Editar oficina</button>
+                <button class="btn btn-sm btn-success" ng-click="carregaOficina(item,$index)" data-toggle="modal" data-target="#modalEditarOficina"><span class="glyphicon glyphicon-pencil"></span> Editar oficina</button>
               </td>
               <td>
                 <button class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-remove"></span> Deletar Oficina</button>
@@ -76,7 +131,7 @@
             </tr>
           </tbody>
         </table>
-        <at-pagination at-config="config" at-list="oficinasEventos"></at-pagination>
+        <at-pagination at-config="configOficina" at-list="oficinasEventos"></at-pagination>
       </div>
     </div>
   </div>
