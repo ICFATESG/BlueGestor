@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var app = angular.module('BlueGestor',['ui.router','ui.select','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask','ngSanitize','sc.select','angular.morris-chart']);
+  var app = angular.module('BlueGestor',['ui.router','ui.select','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask','ngSanitize','sc.select','angular.morris']);
   // Estabelece comnunicação com banco de dados e etc...
   app.run(function($database, $rootScope) {
     // $database.destroy();
