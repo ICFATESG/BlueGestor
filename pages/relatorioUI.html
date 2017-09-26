@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="card">
+            <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="">Selecione o evento</label>
+                            <sc-select
+                            ng-model="eventoSelecionado"
+                            sc-options="evento.id as evento.nomeEvento for evento in listaDeEventos"
+                            placeholder="Select or search a evento in the list..."
+                            ng-disabled="false">
+                          </sc-select>
+                            
+                        </div>
+                        <div class="col-md-4">
+                                <label for="">Selecione a(s) ofincina(s)</label>
+                                <sc-select 
+                                ng-model="oficinaSelecionada"
+                                sc-options="oficina.id as oficina.nomeOficina for oficina in listaDeOficinas"
+                                placeholder="Select from this list...">
+                        </div>
+                        <div class="col-md-4">
+                                <label for="">Selecione por palestrante</label>
+                                <sc-select 
+                                ng-model="palestranteSelecionado"
+                                sc-options="evento.key as evento.nome for evento in listaDePalestrantes"
+                                placeholder="Select from this list...">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>

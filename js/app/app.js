@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var app = angular.module('BlueGestor',['ui.router','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask']);
+  var app = angular.module('BlueGestor',['ui.router','ui.select','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask','ngSanitize','sc.select','angular.morris-chart']);
   // Estabelece comnunicação com banco de dados e etc...
   app.run(function($database, $rootScope) {
     // $database.destroy();
@@ -118,7 +118,10 @@
       url: "/palestrantes",
       templateUrl: "pages/palestrantesUI.html",
       controller: "palestrantesCTRL"
-
+    }).state('relatorios',{
+      url: "/relatorios",
+      templateUrl:"pages/relatorioUI.html",
+      controller: "reportGestor"
     });
     $urlRouterProvider.otherwise("/login");
   });
