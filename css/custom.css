@@ -3,6 +3,16 @@
   src:  url('fonts/Roboto/Roboto-Regular.ttf') format('ttf'),
 }
 
+::-webkit-scrollbar {
+        background-color: #fff;
+        width: .8em
+}
+
+::-webkit-scrollbar-thumb:window-inactive,
+::-webkit-scrollbar-thumb {
+        background: #e3dada;
+}
+
 .navbar-default {
     background-color: #198eb5;
     border-color: #222222;

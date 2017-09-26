@@ -1,44 +1,83 @@
 <div class="container-fluid">
-    <div class="card">
-            <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label for="">Selecione o evento</label>
-                            <sc-select
-                            ng-model="eventoSelecionado"
-                            sc-options="evento.id as evento.nomeEvento for evento in listaDeEventos"
-                            placeholder="Select or search a evento in the list..."
-                            ng-disabled="false">
-                          </sc-select>
-                            
-                        </div>
-                        <div class="col-md-4">
-                                <label for="">Selecione a(s) ofincina(s)</label>
-                                <sc-select 
-                                ng-model="oficinaSelecionada"
-                                sc-options="oficina.id as oficina.nomeOficina for oficina in listaDeOficinas"
-                                placeholder="Select from this list...">
-                        </div>
-                        <div class="col-md-4">
-                                <label for="">Selecione por palestrante</label>
-                                <sc-select 
-                                ng-model="palestranteSelecionado"
-                                sc-options="evento.key as evento.nome for evento in listaDePalestrantes"
-                                placeholder="Select from this list...">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
-                        </div>
-                        <div class="col-md-4">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                        </div>
-                    </div>
-                </div>
+  <div class="card">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">
+          <label for="">Selecione o evento</label>
+          <sc-select
+          ng-model="eventoSelecionado"
+          sc-options="evento.id as evento.nomeEvento for evento in listaDeEventos"
+          placeholder="Select or search a evento in the list...">
+        </sc-select>
+
+      </div>
+      <div class="col-md-4">
+        <label for="">Selecione a(s) ofincina(s)</label>
+        <sc-select
+        ng-model="oficinaSelecionada"
+        sc-options="oficina.id as oficina.nomeOficina for oficina in listaDeOficinas"
+        placeholder="Select from this list...">
+      </div>
+      <div class="col-md-4">
+        <label for="">Selecione por palestrante</label>
+        <sc-select
+        ng-model="palestranteSelecionado"
+        sc-options="evento.key as evento.nome for evento in listaDePalestrantes"
+        placeholder="Select from this list...">
+      </div>
     </div>
+    <div class="row">
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="row">
+
+          <div class="col-md-6">
+
+            <canvas id="doughnut" class="chart chart-doughnut"
+            chart-data="dataDounatu.data" chart-labels="dataDounatu.labels">
+          </canvas>
+
+
+        </div>
+        <div class="col-md-6">
+          <div
+          bar-chart
+          bar-data='[
+          { y: "2009", a: 75,  b: 65 },
+          { y: "2010", a: 50,  b: 40 },
+          { y: "2011", a: 75,  b: 65 },
+          { y: "2012", a: 100, b: 90 }
+          ]'
+          bar-x='y'
+          bar-y='["a", "b"]'
+          bar-labels='["Series A", "Series B"]'
+          bar-colors='["#31C0BE", "#c7254e"]'>
+        </div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div >
+        <div line-chart line-data='[
+        { y: "2006", a: 100, b: 90 },
+        { y: "2007", a: 75,  b: 65 },
+        { y: "2008", a: 50,  b: 40 },
+        { y: "2009", a: 75,  b: 65 },
+        { y: "2010", a: 50,  b: 40 },
+        { y: "2011", a: 75,  b: 65 },
+        { y: "2012", a: 100, b: 90 }
+        ]' line-xkey='y' line-ykeys='["a", "b"]' line-labels='["Serie A", "Serie B"]' line-colors='["#31C0BE", "#c7254e"]'>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
 </div>

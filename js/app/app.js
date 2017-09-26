@@ -1,8 +1,8 @@
 (function() {
   'use strict';
-  var app = angular.module('BlueGestor',['ui.router','ui.select','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask','ngSanitize','sc.select','angular.morris']);
+  var app = angular.module('BlueGestor',['ui.router','ui.select','isteven-multi-select','angular-table','ngCpfCnpj','ui.mask','ngSanitize','sc.select','angular.morris','chart.js']);
   // Estabelece comnunicação com banco de dados e etc...
-  app.run(function($database, $rootScope) {
+  app.run(function($database, $rootScope,$q) {
     // $database.destroy();
     var config = {
       apiKey: "AIzaSyDmOaIOhzHfD36CIwqghdq3oGPVvIgVqVY",
@@ -70,6 +70,9 @@
     }
     this.getOficinas = function (IDevento) {
       return firebase.database().ref('Oficinas').child(IDevento).once('value');
+    }
+    this.getUsuarios = function () {
+      return firebase.database().ref('Usuarios').once('value');
     }
     this.saveOficina = function (Oficina,keyEvento) {
       var key = newKey();
