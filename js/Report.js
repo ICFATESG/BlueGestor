@@ -40,25 +40,37 @@
           //Para a oficina
           angular.forEach(oficinas,function (oficina) {
             oficina.idEvento = key;
+            oficina.nomePessoa = value.nome;
+            oficina.enderecoMAC = value.bluetoothMAC;
             $scope.oficinasVisitas.push(oficina);
           });
         });
       });
     });
+    // Retorna lista pessoas que estiveram na oficina X do Evento Y
+    $scope.loadLista = function(){
+      $scope.listaTable = [];
+      angular.forEach($scope.oficinasVisitas, function(value,key){
+        console.log($scope.oficinaSelecionada)
+          if(value.idoficina == $scope.oficinaSelecionada){
+            $scope.listaTable.push(value);
+          }
+      });
+      
+    }
+    
     // Gera o relatório
     $scope.$watchGroup(['palestranteSelecionado','eventoSelecionado','oficinaSelecionada'],function () {
-      var report = {'evento':$scope.eventoSelecionado,'Oficina':$scope.oficinaSelecionada,'palestrante':$scope.palestranteSelecionado};
-
-      $scope.chartData = _.groupBy($scope.oficinasVisitas, function(value){
-            return value.idEvento + '#' + value.idoficina;
-      });
-      angular.forEach($scope.chartData,function (data) {
-          $scope.dataDounatu.labels.push("Ba")
-          $scope.dataDounatu.data.push(data.length)
-        $scope.dataDounatu.push(teste);
-      });
+      // var report = {'evento':$scope.eventoSelecionado,'Oficina':$scope.oficinaSelecionada,'palestrante':$scope.palestranteSelecionado};
+      // $scope.chartData = _.groupBy($scope.oficinasVisitas, function(value){
+      //       return value.idEvento + '#' + value.idoficina;
+      // });
+      $scope.loadLista();
 
     });
+
+    
+
 
 
     //Retorno de array
@@ -71,6 +83,7 @@
       });
       return arr;
     };
+
 
 
   });
